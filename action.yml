@@ -1,0 +1,38 @@
+# action.yml
+name: 'Create gist'
+description: 'Create a gist with some content'
+inputs:
+  auth:
+    description: 'username:password or with token => username:token'
+    required: true
+  title:
+    description: 'title'
+    required: true
+  content:
+    description: 'content'
+    required: true
+  description:
+    description: 'description'
+    required: false
+    default: ''
+  public:
+    description: 'description'
+    required: false
+    default: false
+  response_field:
+    description: 'response_field : all or url'
+    required: false
+    default: 'all'
+outputs:
+  response: # id of output
+    description: 'gists creations'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.auth }}
+    - ${{ inputs.title }}
+    - ${{ inputs.content }}
+    - ${{ inputs.description }}
+    - ${{ inputs.public }}
+    - ${{ inputs.response_field }}
